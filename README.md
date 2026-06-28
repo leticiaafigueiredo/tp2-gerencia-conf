@@ -83,9 +83,3 @@ bash scripts/setup-ngrok.sh --webhook
 Mantenha o terminal com ngrok aberto durante a demo. Encerrar túnel: `bash scripts/setup-ngrok.sh --stop`
 
 Sem `gh` CLI, o script exibe a URL do webhook para configurar manualmente em GitHub → Settings → Webhooks.
-
-## Próximos passos (Jenkins)
-
-1. ~~Inicializar repositório Git (`main`)~~
-2. ~~Criar `Jenkinsfile` com estágios: Build → Testes → Aceitação → Deploy~~
-3. Configurar webhook via ngrok: `bash scripts/setup-ngrok.sh --webhook`
