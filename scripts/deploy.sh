@@ -8,7 +8,7 @@ CONTAINER_NAME="${CONTAINER_NAME:-biblioteca-api}"
 HOST_PORT="${HOST_PORT:-8000}"
 
 echo "==> Build da imagem Docker"
-docker build -t "${IMAGE_NAME}:${IMAGE_TAG}" .
+docker build --target production -t "${IMAGE_NAME}:${IMAGE_TAG}" .
 
 echo "==> Parando container anterior (se existir)"
 docker stop "${CONTAINER_NAME}" 2>/dev/null || true

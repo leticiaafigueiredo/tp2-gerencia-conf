@@ -1,10 +1,10 @@
 .PHONY: install build test test-unit test-integration test-acceptance run docker-build docker-up clean
 
 install:
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 build:
-	python -m compileall app
+	python3 -m compileall app
 
 test:
 	pytest tests/ -v --cov=app --cov-report=term-missing
