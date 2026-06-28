@@ -55,9 +55,6 @@ pipeline {
         }
 
         stage('Deploy') {
-            when {
-                branch 'main'
-            }
             steps {
                 sh 'bash scripts/deploy.sh'
             }
