@@ -168,5 +168,6 @@ echo "=========================================="
 
 if [[ "${CONFIGURE_WEBHOOK}" == true ]]; then
   echo ""
+  bash "${ROOT_DIR}/scripts/enable-github-trigger.sh"
   JENKINS_URL="${PUBLIC_URL}" bash "${ROOT_DIR}/scripts/configure-github-webhook.sh"
 fi

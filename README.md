@@ -2,18 +2,6 @@
 
 API REST para gerenciamento de biblioteca digital, desenvolvida como projeto base para o **Trabalho Prático 1** da disciplina de Gerência de Configuração e Evolução de Software (PUC).
 
-## Objetivo
-
-Sistema minimamente complexo que atende aos requisitos do TP:
-
-| Requisito | Atendimento |
-|-----------|-------------|
-| ≥ 10 classes/arquivos | Models, services, repository, API, config |
-| ≥ 20 métodos/funções | CRUD de livros, usuários e empréstimos |
-| Testes automatizados | Unitários, integração e aceitação |
-| Pipeline CI/CD | Preparado para Jenkins (próxima etapa) |
-| Implantação | Docker + script `scripts/deploy.sh` |
-
 ## Stack
 
 - **Python 3.12** + **FastAPI**

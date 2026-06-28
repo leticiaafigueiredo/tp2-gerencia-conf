@@ -42,7 +42,11 @@ JOB_XML="$(cat <<EOF
     <scriptPath>Jenkinsfile</scriptPath>
     <lightweight>false</lightweight>
   </definition>
-  <triggers/>
+  <triggers>
+    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github">
+      <spec></spec>
+    </com.cloudbees.jenkins.GitHubPushTrigger>
+  </triggers>
   <disabled>false</disabled>
 </flow-definition>
 EOF
