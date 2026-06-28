@@ -76,8 +76,28 @@ bash scripts/deploy.sh
 | POST | `/api/v1/loans` | Emprestar livro |
 | POST | `/api/v1/loans/{id}/return` | Devolver livro |
 
+## Jenkins + ngrok (webhook na main)
+
+Pipeline CI/CD com Jenkins. Para disparo automático em `git push origin main`, exponha o Jenkins via [ngrok](https://ngrok.com) (gratuito):
+
+```bash
+# 1. Subir Jenkins e criar job
+bash scripts/setup-jenkins.sh
+bash scripts/create-jenkins-job.sh
+
+# 2. Configurar token ngrok (uma vez)
+ngrok config add-authtoken SEU_TOKEN
+
+# 3. Túnel + webhook GitHub
+bash scripts/setup-ngrok.sh --webhook
+```
+
+Mantenha o terminal com ngrok aberto durante a demo. Encerrar túnel: `bash scripts/setup-ngrok.sh --stop`
+
+Sem `gh` CLI, o script exibe a URL do webhook para configurar manualmente em GitHub → Settings → Webhooks.
+
 ## Próximos passos (Jenkins)
 
-1. Inicializar repositório Git (`main`)
-2. Criar `Jenkinsfile` com estágios: Build → Testes → Aceitação → Deploy
-3. Configurar webhook para commits na branch `main`
+1. ~~Inicializar repositório Git (`main`)~~
+2. ~~Criar `Jenkinsfile` com estágios: Build → Testes → Aceitação → Deploy~~
+3. Configurar webhook via ngrok: `bash scripts/setup-ngrok.sh --webhook`
