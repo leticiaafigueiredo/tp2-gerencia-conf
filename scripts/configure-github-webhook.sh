@@ -8,12 +8,19 @@ JENKINS_URL="${JENKINS_URL:-http://localhost:8080}"
 WEBHOOK_URL="${JENKINS_URL%/}/github-webhook/"
 
 if ! command -v gh >/dev/null 2>&1; then
-  echo "ERRO: gh CLI não encontrado. Instale com: sudo apt install gh"
-  echo "Configure manualmente em: https://github.com/${REPO}/settings/hooks"
+  echo "AVISO: gh CLI não encontrado. Configure manualmente em:"
+  echo "  https://github.com/${REPO}/settings/hooks"
+  echo ""
   echo "  Payload URL: ${WEBHOOK_URL}"
   echo "  Content type: application/json"
   echo "  Events: Just the push event"
-  exit 1
+  echo ""
+  if [[ "${JENKINS_URL}" == *"localhost"* ]] || [[ "${JENKINS_URL}" == *"127.0.0.1"* ]]; then
+    echo "NOTA: GitHub não alcança localhost. Use um túnel (ngrok/cloudflare) ou"
+    echo "      Jenkins em servidor público, e então reexecute este script com:"
+    echo "      JENKINS_URL=https://seu-dominio-publico bash scripts/configure-github-webhook.sh"
+  fi
+  exit 0
 fi
 
 echo "==> Configurando webhook em github.com/${REPO}"

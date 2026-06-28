@@ -10,6 +10,10 @@ HOST_PORT="${HOST_PORT:-8000}"
 echo "==> Build da imagem Docker"
 docker build --target production -t "${IMAGE_NAME}:${IMAGE_TAG}" .
 
+echo "==> Parando containers que usam a porta ${HOST_PORT}"
+docker ps --filter "publish=${HOST_PORT}" -q | xargs -r docker stop 2>/dev/null || true
+docker ps --filter "publish=${HOST_PORT}" -q | xargs -r docker rm 2>/dev/null || true
+
 echo "==> Parando container anterior (se existir)"
 docker stop "${CONTAINER_NAME}" 2>/dev/null || true
 docker rm "${CONTAINER_NAME}" 2>/dev/null || true
