@@ -1,0 +1,10 @@
+services:
+  biblioteca-api:
+    build:
+      context: .
+      target: production
+    ports:
+      - "8000:8000"
+    environment:
+      - BIB_DEBUG=false
+    restart: unless-stopped
