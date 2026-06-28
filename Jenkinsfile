@@ -9,13 +9,18 @@ pipeline {
         IMAGE_NAME = 'biblioteca-api'
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
         PYTHONPATH = "${WORKSPACE}"
+        VENV_DIR   = "${WORKSPACE}/.venv"
     }
 
     stages {
         stage('Build') {
             steps {
-                sh 'pip3 install -r requirements.txt'
-                sh 'make build'
+                sh '''
+                    python3 -m venv "${VENV_DIR}"
+                    . "${VENV_DIR}/bin/activate"
+                    pip install -r requirements.txt
+                    make build
+                '''
             }
         }
 
@@ -23,12 +28,18 @@ pipeline {
             parallel {
                 stage('Unit') {
                     steps {
-                        sh 'make test-unit'
+                        sh '''
+                            . "${VENV_DIR}/bin/activate"
+                            make test-unit
+                        '''
                     }
                 }
                 stage('Integration') {
                     steps {
-                        sh 'make test-integration'
+                        sh '''
+                            . "${VENV_DIR}/bin/activate"
+                            make test-integration
+                        '''
                     }
                 }
             }
@@ -36,7 +47,10 @@ pipeline {
 
         stage('Acceptance') {
             steps {
-                sh 'make test-acceptance'
+                sh '''
+                    . "${VENV_DIR}/bin/activate"
+                    make test-acceptance
+                '''
             }
         }
 
@@ -51,9 +65,6 @@ pipeline {
     }
 
     post {
-        always {
-            cleanWs()
-        }
         failure {
             echo 'Pipeline falhou — verificar logs.'
         }

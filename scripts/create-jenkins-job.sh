@@ -21,17 +21,9 @@ JOB_XML="$(cat <<EOF
   <actions/>
   <description>Pipeline Biblioteca API - Build, Test, Acceptance, Deploy</description>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-      <triggers>
-        <com.cloudbees.jenkins.GitHubPushTrigger plugin="github">
-          <spec></spec>
-        </com.cloudbees.jenkins.GitHubPushTrigger>
-      </triggers>
-    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-  </properties>
+  <properties/>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition" plugin="workflow-cps">
-    <scm class="hudson.plugins.git.GitScm" plugin="git">
+    <scm class="hudson.plugins.git.GitSCM" plugin="git">
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
@@ -48,7 +40,7 @@ JOB_XML="$(cat <<EOF
       <extensions/>
     </scm>
     <scriptPath>Jenkinsfile</scriptPath>
-    <lightweight>true</lightweight>
+    <lightweight>false</lightweight>
   </definition>
   <triggers/>
   <disabled>false</disabled>
@@ -92,3 +84,4 @@ else
 fi
 
 echo "Job disponível em: ${JENKINS_URL}/job/${JOB_NAME}/"
+echo "Disparo automático: webhook GitHub + trigger githubPush() no Jenkinsfile"
