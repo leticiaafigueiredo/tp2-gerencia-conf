@@ -49,9 +49,6 @@ def create_book(payload: BookCreate) -> dict:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@router.get("/books")
-def list_books(available_only: bool = False) -> list[dict]:
-    return [b.to_dict() for b in book_service.list_books(available_only=available_only)]
 
 
 @router.get("/books/{book_id}")
