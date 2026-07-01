@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # Sobe Jenkins via Docker e instala plugins necessários para o pipeline.
 set -euo pipefail
 
@@ -7,7 +6,6 @@ JENKINS_URL="${JENKINS_URL:-http://localhost:8080}"
 JENKINS_CONTAINER="${JENKINS_CONTAINER:-jenkins}"
 
 echo "==> Construindo imagem Jenkins (Python, Docker CLI, Make)"
-# group_add usa o GID do grupo docker no host (ajuste se necessário)
 HOST_DOCKER_GID="${HOST_DOCKER_GID:-$(getent group docker | cut -d: -f3)}"
 export HOST_DOCKER_GID
 docker compose -f "${ROOT_DIR}/docker-compose.jenkins.yml" build
